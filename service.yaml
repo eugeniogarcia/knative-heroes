@@ -1,0 +1,17 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: hero
+  namespace: default
+  annotations: 
+    build.knative.dev/docker-0: https://index.docker.io/v1/
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: docker.io/egsmartin/heroes:latest
+            imagePullPolicy: Always
+            ports:
+              - containerPort: 8081
