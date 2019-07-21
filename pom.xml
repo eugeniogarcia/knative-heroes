@@ -53,12 +53,10 @@
 					  -->
 					  <to>
 					    <image>docker.io/egsmartin/hello-jib:${project.version}</image>
-					    <!--
 						<auth>
 					    	<username>egsmartin</username>
 					    	<password>Vera1511</password>
 					    </auth>
-						-->
 					  </to>
 					  <container>
 						<ports>
