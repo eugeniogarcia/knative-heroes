@@ -1,0 +1,47 @@
+[req]
+days=3650
+distinguished_name = req_distinguished_name
+# Extensiones a incluir en la solicitud de certificado que se envia a la CA
+req_extensions = v3_req
+# Extensiones que la CA incluira en el certificado cuando lo cree
+x509_extensions = v3_ca
+
+[req_distinguished_name]
+countryName = Country Name (2 letter code)
+countryName_default = ES
+stateOrProvinceName = State or Province Name (full name)
+stateOrProvinceName_default = Madrid
+localityName = Locality Name (eg, city)
+localityName_default = Torrelodones
+organizationName = Organizacion
+organizationName_default = National Grid
+organizationalUnitName	= Organizational Unit Name (eg, section)
+organizationalUnitName_default	= ESO
+commonName = Common Name
+commonName_default = www.gz.com
+commonName_max	= 64
+emailAddress = email
+emailAddress_default = egsmartin@gmail.com
+
+[ v3_req ]
+#basicConstraints = CA:FALSE
+basicConstraints = CA:TRUE,pathlen:2147483647
+# Ver link https://www.secureblackbox.com/kb/help/ref_howto_pki_cert_checkkeyusage.html
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment, dataEncipherment, cRLSign, keyCertSign
+
+[ v3_ca ]
+basicConstraints = CA:TRUE,pathlen:2147483647
+extendedKeyUsage = serverAuth, clientAuth
+subjectKeyIdentifier=hash
+authorityKeyIdentifier=keyid:always,issuer:always
+subjectAltName = @alt_names
+subjectKeyIdentifier=hash
+authorityKeyIdentifier=keyid:always,issuer:always
+
+[alt_names]
+DNS.1 = www.gz.com
+DNS.2 = eugenio
+DNS.3 = hadoop
+DNS.4 = spark
+IP.1 = 127.0.0.1
+IP.2 = 192.168.1.131

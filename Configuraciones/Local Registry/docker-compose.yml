@@ -1,0 +1,18 @@
+registry:
+  restart: always
+  image: registry:2
+  hostname: www.gz.com
+  ports:
+    - 5000:5000
+  environment:
+    REGISTRY_HTTP_TLS_CERTIFICATE: /certs/euge.pem
+    REGISTRY_HTTP_TLS_KEY: /certs/euge.key
+    REGISTRY_AUTH: htpasswd
+    REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
+    REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
+  volumes:
+    - C:/Users/Eugenio/Documents/imagenes:/var/lib/registry
+    - C:/Users/Eugenio/Documents/certs:/certs
+    - C:/Users/Eugenio/Documents/imagenes/auth:/auth
+
+

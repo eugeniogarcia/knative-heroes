@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: heroes
+  labels:
+    app: heroes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: heroes
+  template:
+    metadata:
+      labels:
+        app: heroes
+    spec:
+      containers:
+      - name: heroes
+        image: localhost:5000/hello-jib:1.0.0-SNAPSHOT
+        ports:
+        - containerPort: 80
