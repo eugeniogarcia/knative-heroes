@@ -94,6 +94,7 @@ registry:
     - C:/Users/Eugenio/Documents/imagenes/auth:/auth
 ```
 # Configurar Minikube para usar el Local Registry
+## Actualizar el DNS
 Necesitamos crear una entrada en el /etc/hosts - DNS - del nodo donde estamos ejecutando Minikube. Primero averiguamos la IP del Local registry, o lo que es lo mismo, la IP del PC.  
 
 Averiguamos la IP que tiene asignada el nodo de Minikube. `minikube ip` devuelve `192.168.0.130`. Si hacemos `minikube ssh` y a continuacion un `ìfconfig`, veremos que `eth0` es efectivamente `192.168.0.130`.  
@@ -108,3 +109,6 @@ sudo -s
 echo "192.168.0.127 www.gz.com" >> /etc/hosts
 
 ```
+## Configurar el TLS
+
+## Probar
