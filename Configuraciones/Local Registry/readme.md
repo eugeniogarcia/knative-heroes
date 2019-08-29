@@ -109,6 +109,50 @@ sudo -s
 echo "192.168.0.127 www.gz.com" >> /etc/hosts
 
 ```
+## Configurar el Firewall
+Tendremos que asegurar que el puerto 5000 este abierto en el pc para que el nodo pueda conectarse. En el windows firewall he creado una regla que permite desde la red `Private` conectarse via `TCP` con el puerto 5000.  
+
 ## Configurar el TLS
+Cuando tratemos de conectarnos desde el nodo al registry, haremos:  
+```
+minikube ssh
+
+docker login www.gz.com:5000
+´´´
+Al ingresar las credenciales tendremos un error relativo al certificado X509 - que no se encuentra, que no se confia en la CA, ... Estos errores se resuelven configurando el demonio de docker con los certificados.
+
+Tendremos que crear un directorio para cada repositorio, y copiar en el todos los certificados. Todo esto se describe [aqui](https://docs.docker.com/engine/security/certificates/). Los pasos en nuestro caso seran:
+```
+mkdir  /etc/docker/certs.d/www.gz.com:5000
+```
+En este directorio copiaremos los certificados. Tendremos que copiar `euge.key`, `euge.cert` y `ca.crt`. En mi caso `euge.cert` y `ca.crt` son identicos e iguales a `euge.pem`:  
+
+```
+cp euge.pem euge.cert
+
+cp euge.pem ca.crt
+```
+
+Asi el directorio contendra:  
+```
+$ pwd
+/etc/docker/certs.d/www.gz.com:5000
+
+$ ls -al
+total 16
+drwxr-xr-x 2 root root    0 Aug 28 00:55 .
+drwxr-xr-x 3 root root    0 Aug 28 00:09 ..
+-rw-r--r-- 1 root root 1872 Aug 28 00:08 ca.crt
+-rw-r--r-- 1 root root 1872 Aug 28 00:04 euge.cert
+-rw-r--r-- 1 root root 1732 Aug 28 00:00 euge.key
+-rw-r--r-- 1 root root 1872 Aug 28 00:00 euge.pem
+
+```
 
 ## Probar
+Para comprobar que tenemos acceso al registry local:  
+```
+minikube ssh
+
+docker login www.gz.com:5000
+```
