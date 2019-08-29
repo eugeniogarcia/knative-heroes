@@ -43,7 +43,8 @@ docker run -d -p 5000:5000 --restart=always --name registry -v C:/Users/Eugenio/
 Con esta configuracion en `https://www.gz.com:5000/v2/_catalog` se mostrara el registry.  
 
 ### Generar los certificados
-Para generar los certificados [ver](../openssl/README.md).  
+Los certificados los podemos generar usando openssl tal y como se indica [aqui](../openssl/README.md).  
+
 En la documentacion se hace referencia a un archivo `.crt`. Este archivo guarda la clave publica. En mi caso no funcionaba, asi que he utilizado el `.pem` - que tambien tiene la clave publica, pero en otro formato.
 
 # Configuracion avanzada con docker-compose
