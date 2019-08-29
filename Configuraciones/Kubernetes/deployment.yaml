@@ -18,4 +18,7 @@ spec:
       - name: heroes
         image: www.gz.com:5000/hello-jib:0.0.1-SNAPSHOT
         ports:
-        - containerPort: 80
+        - name: http  
+          containerPort: 8082
+      imagePullSecrets:
+      - name: milocalregistry          

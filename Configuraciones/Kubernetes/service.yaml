@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: heroes-svc
+  namespace: default
+  annotations:
+  labels:
+    app: heroes
+spec:
+  type: ClusterIP
+  selector:
+    app: heroes
+  ports:
+  - name: http              
+    port: 80                
+    targetPort: http          
