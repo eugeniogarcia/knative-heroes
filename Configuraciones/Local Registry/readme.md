@@ -18,6 +18,7 @@ El usuario y password de cada una de las credenciales se guardara en un archivo.
 docker run --rm --entrypoint htpasswd registry:2 -Bbn egsmartin "Vera1511" > htpasswd
 
 ```
+
 Esto crea el archivo `htpasswd` con las credenciales, incluyendo la contraseña encriptada.    
 
 __NOTA__  
