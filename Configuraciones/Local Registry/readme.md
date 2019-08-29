@@ -119,7 +119,8 @@ Cuando tratemos de conectarnos desde el nodo al registry, haremos:
 minikube ssh
 
 docker login www.gz.com:5000
-´´´
+```
+
 Al ingresar las credenciales tendremos un error relativo al certificado X509 - que no se encuentra, que no se confia en la CA, ... Estos errores se resuelven configurando el demonio de docker con los certificados.
 
 Tendremos que crear un directorio para cada repositorio, y copiar en el todos los certificados. Todo esto se describe [aqui](https://docs.docker.com/engine/security/certificates/). Los pasos en nuestro caso seran:

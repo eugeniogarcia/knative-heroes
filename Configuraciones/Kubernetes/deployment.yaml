@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: heroes
-        image: localhost:5000/hello-jib:1.0.0-SNAPSHOT
+        image: www.gz.com:5000/hello-jib:0.0.1-SNAPSHOT
         ports:
         - containerPort: 80
