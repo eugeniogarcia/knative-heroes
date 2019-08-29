@@ -1,5 +1,5 @@
 # Registry Local básico
-El registry esta implementado con un ![contenedor](https://hub.docker.com/_/registry). Podemos lanzar el registry con una configuracion por defecto:  
+El registry esta implementado con un [contenedor](https://hub.docker.com/_/registry). Podemos lanzar el registry con una configuracion por defecto:  
 ```
 docker run -d -p 5000:5000 --restart=always --name registry registry:2
 
@@ -9,7 +9,7 @@ docker run -d -p 5000:5000 --restart=always --name registry registry:latest
 Arranca un registry local. Podemos acceder a el en `http://localhost:5000/v2/_catalog`. Este registry esta expuesto en el puerto 5000, no tiene autentificacion, ni esta protegido con TLS.  
 
 # Configuracion avanzada del Local Registry
-Podemos ver la informacion detallada ![aqui](https://docs.docker.com/registry/deploying/). Vamos a habilitar basic authentication, y TLS.  
+Podemos ver la informacion detallada [aqui](https://docs.docker.com/registry/deploying/). Vamos a habilitar basic authentication, y TLS.  
 
 ## Basic Authentication
 El usuario y password de cada una de las credenciales se guardara en un archivo. Utilizaremos htpasswd para generar el archivo. Hay una copia de htpasswd en la propia imagen del registry, asi que podemos generar el archivo de credenciales como sigue:
@@ -43,7 +43,7 @@ docker run -d -p 5000:5000 --restart=always --name registry -v C:/Users/Eugenio/
 Con esta configuracion en `https://www.gz.com:5000/v2/_catalog` se mostrara el registry.  
 
 ### Generar los certificados
-Para generar los certificados ![ver](../openssl/README.md).  
+Para generar los certificados [ver](../openssl/README.md).  
 En la documentacion se hace referencia a un archivo `.crt`. Este archivo guarda la clave publica. En mi caso no funcionaba, asi que he utilizado el `.pem` - que tambien tiene la clave publica, pero en otro formato.
 
 # Configuracion avanzada con docker-compose
