@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: heroes
+  namespace: heroes-ns
   labels:
     app: heroes
 spec:
@@ -20,5 +21,17 @@ spec:
         ports:
         - name: http  
           containerPort: 8082
+        livenessProbe:
+          httpGet:
+            path: /heroes
+            port: 8082
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
+        readinessProbe:
+          httpGet:
+            path: /heroes
+            port: 8082
+          initialDelaySeconds: 0
+          timeoutSeconds: 1          
       imagePullSecrets:
       - name: milocalregistry          
