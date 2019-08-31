@@ -3,6 +3,7 @@ package com.swisscom.heroes;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.context.annotation.RequestScope;
 
 import com.swisscom.hero.datasource.heroesDS;
 import com.swisscom.heroes.filter.HttpFiltro;
@@ -16,6 +17,12 @@ public class Configure {
 	@Bean
 	public heroesDS service() {
 		return new heroesDS();
+	}
+
+	@Bean
+	@RequestScope
+	public RequestContext requestContext() {
+		return new RequestContext();
 	}
 
 	@Bean

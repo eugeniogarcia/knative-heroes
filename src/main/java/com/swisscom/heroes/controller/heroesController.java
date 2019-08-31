@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.swisscom.hero.datasource.heroesDS;
+import com.swisscom.heroes.filter.RequestContext;
 import com.swisscom.heroes.model.Hero;
 
 @RestController
@@ -19,11 +20,19 @@ import com.swisscom.heroes.model.Hero;
 public class heroesController {
 
 	@Autowired
-	heroesDS servicio;
+	private heroesDS servicio;
+
+	@Autowired
+	private RequestContext context;
 
 	@RequestMapping(value = "/heroes",produces = { "application/json" }, method = RequestMethod.GET)
 	public ResponseEntity<List<Hero>> getHeroes(){
-		return new ResponseEntity<List<Hero>>(servicio.list(),HttpStatus.OK);
+		if(this.context.isFail()) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		else {
+			return new ResponseEntity<>(servicio.list(),HttpStatus.OK);
+		}
 	}
 
 
@@ -31,10 +40,10 @@ public class heroesController {
 	public ResponseEntity<Hero> getHero(@PathVariable("id") Integer id){
 		final Hero resp=servicio.find(id);
 		if(resp==null) {
-			return new ResponseEntity<Hero>(HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		else {
-			return new ResponseEntity<Hero>(resp,HttpStatus.OK);
+			return new ResponseEntity<>(resp,HttpStatus.OK);
 		}
 	}
 
@@ -42,20 +51,20 @@ public class heroesController {
 	public ResponseEntity<Hero> addHero(@RequestBody Hero hero){
 		final Hero val=servicio.add(hero);
 		if(val!=null) {
-			return new ResponseEntity<Hero>(val,HttpStatus.OK); 
+			return new ResponseEntity<>(val,HttpStatus.OK); 
 		}
 		else {
-			return new ResponseEntity<Hero>(HttpStatus.BAD_REQUEST); 
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
 		}
 	}
 
 	@RequestMapping(value = "/heroes",produces = { "application/json" }, method = RequestMethod.PUT)
 	public ResponseEntity<Void> updateHero(@RequestBody Hero hero){
 		if(servicio.update(hero)) {
-			return new ResponseEntity<Void>(HttpStatus.OK); 
+			return new ResponseEntity<>(HttpStatus.OK); 
 		}
 		else {
-			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST); 
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
 		}
 	}
 
@@ -63,14 +72,14 @@ public class heroesController {
 	public ResponseEntity<Void> deleteHero(@PathVariable int id){
 		final Hero resp=servicio.find(id);
 		if(resp==null) {
-			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 
 		if(servicio.delete(resp)) {
-			return new ResponseEntity<Void>(HttpStatus.OK); 
+			return new ResponseEntity<>(HttpStatus.OK); 
 		}
 		else {
-			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST); 
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
 		}
 	}
 
