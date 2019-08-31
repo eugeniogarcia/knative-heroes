@@ -16,8 +16,8 @@ spec:
         subset: grupo1
     fault:
       delay:
-        percent: 100.0
-        fixedDelay: 4s
+        percent: 50.0
+        fixedDelay: 2s
   - match:
     - headers:
         x-usuario:
@@ -28,8 +28,27 @@ spec:
         subset: grupo2
     fault:
       delay:
-        percent: 50.0
-        fixedDelay: 2s
+        percent: 100.0
+        fixedDelay: 1s
+      abort:
+        percent: 50.0        
+        httpStatus: 500
+  - match:
+    - headers:
+        x-usuario:
+          exact: pupa
+    route:
+    - destination:
+        host: heroes-svc
+        subset: grupo1
+  - match:
+    - headers:
+        x-usuario:
+          exact: mausi
+    route:
+    - destination:
+        host: heroes-svc
+        subset: grupo2
     timeout: 0.5s
   - route:
     - destination:
