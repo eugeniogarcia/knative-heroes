@@ -5,19 +5,21 @@ metadata:
 spec:
   host: heroes-svc
   trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL	
+    loadBalancer:
+      simple: ROUND_ROBIN
     connectionPool:
       tcp:
-        maxConnections: 1
+        maxConnections: 2
       http:
-        http1MaxPendingRequests: 1
-        maxRequestsPerConnection: 1
+        http2MaxRequests: 4
+        maxRequestsPerConnection: 2		
     outlierDetection:
-      consecutiveErrors: 3
-      interval: 5s
-      baseEjectionTime: 20s
-      maxEjectionPercent: 100
-    loadBalancer:
-      simple: RANDOM
+      consecutiveErrors: 2
+      interval: 1s
+      baseEjectionTime: 3m
+      maxEjectionPercent: 100  
   subsets:
   - name: grupo1
     labels:
@@ -25,6 +27,3 @@ spec:
   - name: grupo2
     labels:
       version: v2
-    trafficPolicy:
-      loadBalancer:
-        simple: ROUND_ROBIN
