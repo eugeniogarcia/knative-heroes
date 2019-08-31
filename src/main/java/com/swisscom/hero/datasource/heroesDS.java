@@ -16,8 +16,8 @@ public class heroesDS {
 		source.add(new Hero.Builder().id(2).name("Nani").createHero());
 		source.add(new Hero.Builder().id(3).name("Mausi").createHero());
 		source.add(new Hero.Builder().id(4).name("Nico").createHero());
-		source.add(new Hero.Builder().id(4).name("Verita").createHero());
-		source.add(new Hero.Builder().id(4).name("Eugenio").createHero());
+		source.add(new Hero.Builder().id(5).name("Verita").createHero());
+		source.add(new Hero.Builder().id(6).name("Eugenio").createHero());
 		last=6;
 	}
 
