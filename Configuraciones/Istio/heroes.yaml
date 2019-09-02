@@ -6,6 +6,11 @@ metadata:
   name: milocalregistry
 type: kubernetes.io/dockerconfigjson
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: heroes
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -25,6 +30,7 @@ spec:
         app: heroes
         version: v1
     spec:
+      serviceAccountName: heroes
       containers:
       - name: heroes
         image: www.gz.com:5000/hello-jib:0.0.1-SNAPSHOT
@@ -32,18 +38,6 @@ spec:
         ports:
         - name: http  
           containerPort: 8082
-        livenessProbe:
-          httpGet:
-            path: /heroes
-            port: 8082
-          initialDelaySeconds: 15
-          timeoutSeconds: 1
-        readinessProbe:
-          httpGet:
-            path: /heroes
-            port: 8082
-          initialDelaySeconds: 0
-          timeoutSeconds: 1          
       imagePullSecrets:
       - name: milocalregistry  
 ---
@@ -66,6 +60,7 @@ spec:
         app: heroes
         version: v2
     spec:
+      serviceAccountName: heroes
       containers:
       - name: heroes
         image: www.gz.com:5000/hello-jib:0.0.2-SNAPSHOT
@@ -73,18 +68,6 @@ spec:
         ports:
         - name: http  
           containerPort: 8082
-        livenessProbe:
-          httpGet:
-            path: /heroes
-            port: 8082
-          initialDelaySeconds: 15
-          timeoutSeconds: 1
-        readinessProbe:
-          httpGet:
-            path: /heroes
-            port: 8082
-          initialDelaySeconds: 0
-          timeoutSeconds: 1          
       imagePullSecrets:
       - name: milocalregistry          
 ---
