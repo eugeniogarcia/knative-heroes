@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: heroes-v2
+  namespace: heroes-ns
+  labels:
+    app: heroes
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: heroes
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: heroes
+        version: v2
+    spec:
+      containers:
+      - name: heroes
+        image: egsmcontenedor.azurecr.io/hello-jib:0.0.2-SNAPSHOT
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 8082
+        livenessProbe:
+          httpGet:
+            path: /heroes
+            port: 8082
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
+        readinessProbe:
+          httpGet:
+            path: /heroes
+            port: 8082
+          initialDelaySeconds: 0
+          timeoutSeconds: 1
+      imagePullSecrets:
+      - name: milocalregistry
