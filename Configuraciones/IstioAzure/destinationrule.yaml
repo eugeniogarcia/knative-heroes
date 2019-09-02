@@ -1,0 +1,29 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: heroes-svc-dr
+spec:
+  host: heroes-svc
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL	
+    loadBalancer:
+      simple: ROUND_ROBIN
+    connectionPool:
+      tcp:
+        maxConnections: 2
+      http:
+        http2MaxRequests: 4
+        maxRequestsPerConnection: 2		
+    outlierDetection:
+      consecutiveErrors: 2
+      interval: 1s
+      baseEjectionTime: 3m
+      maxEjectionPercent: 100  
+  subsets:
+  - name: grupo1
+    labels:
+      version: v1
+  - name: grupo2
+    labels:
+      version: v2
