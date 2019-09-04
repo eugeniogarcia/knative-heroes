@@ -16,7 +16,7 @@ docker tag www.gz.com:5000/fehello-jib:0.0.1-SNAPSHOT egsmcontenedor.azurecr.io/
 docker push egsmcontenedor.azurecr.io/fehello-jib:0.0.1-SNAPSHOT
 ```
 
-# Kubectl
+# Kubectl (windows)
 To configure kubectl to manage the Azure Kubernetes cluster:  
 
 ```
