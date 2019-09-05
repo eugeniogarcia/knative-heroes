@@ -55,12 +55,26 @@
 					  </from>
 
 					  <to>
-					    <image>www.gz.com:5000/hello-jib:${project.version}</image>
-					    <!-- <image>docker.io/egsmartin/hello-jib:${project.version}</image> -->
+					    <!-- 
+					    <image>www.gz.com:5000/hello-jib:${project.version}</image>  
 						<auth>
 					    	<username>egsmartin</username>
 					    	<password>Vera1511</password>
 					    </auth>
+					    -->	
+					    <!-- 
+					    <image>docker.io/egsmartin/hello-jib:${project.version}</image>
+						<auth>
+					    	<username>egsmartin</username>
+					    	<password>Vera1511</password>
+					    </auth>
+					    -->
+					    <image>egsmcontenedor.azurecr.io/hello-jib:${project.version}</image>  
+						<auth>
+					    	<username>egsmContenedor</username>
+					    	<password>LNTuvGUKsCf9w5lMgJwYBjiMWJL/19Ea</password>
+					    </auth>
+
 					  </to>
 					  <container>
 						<ports>
