@@ -1,0 +1,17 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Configuration
+metadata:
+  name: heroes-svc
+  namespace: heroes-kn-ns
+spec:
+  template:
+    spec:
+      containers:
+      - name: heroes
+        image: egsmcontenedor.azurecr.io/hello-jib:0.0.1-SNAPSHOT
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 8082
+      imagePullSecrets:
+      - name: milocalregistry
