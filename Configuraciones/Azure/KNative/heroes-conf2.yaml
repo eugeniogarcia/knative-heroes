@@ -6,12 +6,10 @@ metadata:
 spec:
   template:
     spec:
+      serviceAccountName: build-bot
       containers:
       - name: heroes
         image: egsmcontenedor.azurecr.io/hello-jib:0.0.2-SNAPSHOT
         imagePullPolicy: Always
         ports:
-        - name: http
-          containerPort: 8082
-      imagePullSecrets:
-      - name: milocalregistry
+        - containerPort: 8082

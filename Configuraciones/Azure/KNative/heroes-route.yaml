@@ -5,9 +5,24 @@ metadata:
   namespace: heroes-kn-ns
 spec:
   traffic:
-  - configurationName: heroes-svc-00001
-    name: v1
-    percent: 70
-  - configurationName: heroes-svc-00002
+  - revisionName: heroes-svc-fpxh8
     name: v2
+    percent: 70
+  - revisionName: heroes-svc-l62pf
+    name: v1
     percent: 30
+#http://heroes-svc.heroes-kn-ns/heroes
+#http://v1-heroes-svc.heroes-kn-ns/heroes
+#http://v2-heroes-svc.heroes-kn-ns/heroes
+---
+apiVersion: serving.knative.dev/v1alpha1
+kind: Route
+metadata:
+  name: heroes-last-svc
+  namespace: heroes-kn-ns
+spec:
+  traffic:
+  - configurationName: heroes-svc
+    percent: 100
+
+#http://heroes-last-svc.heroes-kn-ns/heroes
