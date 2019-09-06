@@ -31,7 +31,7 @@ spec:
         percent: 100.0
         fixedDelay: 1s
       abort:
-        percent: 50.0        
+        percent: 50.0
         httpStatus: 500
   - match:
     - headers:
@@ -59,4 +59,3 @@ spec:
         host: heroes-svc
         subset: grupo2
       weight: 80
-        
