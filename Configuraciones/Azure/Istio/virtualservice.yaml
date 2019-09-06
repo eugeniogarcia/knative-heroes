@@ -4,7 +4,7 @@ metadata:
   name: heroes-svc-vs
 spec:
   hosts:
-  - heroes-svc.default
+  - heroes-svc
   http:
   - match:
     - headers:
