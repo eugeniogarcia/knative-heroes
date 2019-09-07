@@ -5,12 +5,12 @@ metadata:
   namespace: heroes-kn-ns
 spec:
   traffic:
-  - revisionName: heroes-svc-s7cv5
+  - revisionName: heroes-svc-sw49d
     name: v2
-    percent: 70
-  - revisionName: heroes-svc-xsrk4
+    percent: 60
+  - revisionName: heroes-svc-rnlw4
     name: v1
-    percent: 30
+    percent: 40
 #http://heroes-svc.heroes-kn-ns/heroes
 #http://v1-heroes-svc.heroes-kn-ns/heroes
 #http://v2-heroes-svc.heroes-kn-ns/heroes
