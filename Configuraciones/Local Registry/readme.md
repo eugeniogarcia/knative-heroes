@@ -22,7 +22,7 @@ docker run --rm --entrypoint htpasswd registry:2 -Bbn egsmartin "Vera1511" > htp
 Esto crea el archivo `htpasswd` con las credenciales, incluyendo la contraseña encriptada.    
 
 __NOTA__  
-En el procedimiento anterior, en windows, hay que quitar los retornos de carro. 
+En el procedimiento anterior, en windows, hay que quitar los retornos de carro (si miramos con notepad++ veremos que hay caracteres especiales CRLF. Hay que quitarles y dejarles como LF; La otra opcion es htpasswd desde linux. [ver](https://blog.sleeplessbeastie.eu/2018/04/16/how-to-setup-private-docker-registry/)
 
 ### Arrancar el registry con basic authentication
 Para arrancar el registry con basic authentication:  
@@ -38,7 +38,7 @@ Vamos mapear un volumen al contenedor `-v C:/Users/Eugenio/Documents/certs:/cert
 Las variables de entorno `REGISTRY_HTTP_TLS_CERTIFICATE` y `REGISTRY_HTTP_TLS_KEY` indican cual es la clave publica y privada que se tienen que utilizar.  
 
 ```
-docker run -d -p 5000:5000 --restart=always --name registry -v C:/Users/Eugenio/Documents/imagenes/auth:/auth -e "REGISTRY_AUTH=htpasswd" -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd -v C:/Users/Eugenio/Documents/certs:/certs -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/euge.pem -e REGISTRY_HTTP_TLS_KEY=/certs/euge.key registry:2
+docker run -d -p 5000:5000 --restart=always --name registry -v C:/Users/Eugenio/Documents/imagenes:/var/lib/registry -v C:/Users/Eugenio/Documents/imagenes/auth:/auth -e "REGISTRY_AUTH=htpasswd" -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd -v C:/Users/Eugenio/Documents/certs:/certs -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/euge.pem -e REGISTRY_HTTP_TLS_KEY=/certs/euge.key registry:2
 ```
 
 Con esta configuracion en `https://www.gz.com:5000/v2/_catalog` se mostrara el registry.  
