@@ -9,7 +9,7 @@ Actualizar las propiedades del plugin jib con los datos del repositorio, el usua
 <version>1.7.0</version>
 <configuration>
   <from>
-	<image>openjdk:8-jre-alpine</image>
+	<image>openjdk:8u212-jre-alpine</image>
 	<auth>
 		<username>egsmartin</username>
 		<password>Vera1511</password>
