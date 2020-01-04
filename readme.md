@@ -1,3 +1,4 @@
+# Usando JIB
 
 Actualizar las propiedades del plugin jib con los datos del repositorio, el usuario y la contraseña:
 
@@ -46,4 +47,63 @@ Lanzamos el proceso de creacion de la imagen como sigue:
 
 ```sh
 mvn compile jib:build
+```
+
+# Con Dockerfile
+
+Tenemos que arrancar el demonio de docker. Una vez arrancado podemos proceder a construir la imagen con nuestro `dockerfile`.
+
+```sh
+docker build -t knative-heroes .
+```
+
+Podemos ejecutar la imagen:
+
+```sh
+docker run  -d -p8084:8082 knative-heroes
+```
+
+Para comprobar que efectivamente esta corriendo:
+
+```sh
+curl http://localhost:8084/heroes
+
+[{"id":1,"name":"Pupa"},{"id":2,"name":"Nani"},{"id":3,"name":"Mausi"},{"id":4,"name":"Nico"},{"id":5,"name":"Verita"},{"id":6,"name":"Eugenio"}]
+```
+
+Listamos las imagenes:
+
+```sh
+docker images
+
+knative-heroes									latest              6beba03c0b73        9 minutes ago       103MB
+```
+
+Vemos que figura la imagen que acabamos de crear, `knative-heroes `. Vamos a añadirle el tag de nuestro repositorio en Azure:
+
+```sh
+docker tag knative-heroes:latest pruebacontenedor.azurecr.io/knative-heroes:latest
+```
+
+Ahora volvemos a mirar las imagenes:
+
+```sh
+docker images
+
+knative-heroes									latest              6beba03c0b73        9 minutes ago       103MB
+pruebacontenedor.azurecr.io/knative-heroes      latest              6beba03c0b73        9 minutes ago       103MB
+```
+
+Notese que aparece nuestra imagen con el tag, sigue figurando la imagen sin el tag, pero ambas tienen el __mismo hash__.
+
+Publicamos nuestro repositorio en el repositorio de Azure
+
+```sh
+docker push pruebacontenedor.azurecr.io/knative-heroes
+
+The push refers to repository [pruebacontenedor.azurecr.io/knative-heroes]
+0bb60cb7757e: Pushing [==>                                                ]  786.9kB/18.24MB
+edd61588d126: Pushing [=>                                                 ]  2.148MB/79.39MB
+9b9b7f3d56a0: Pushed                                                                                                                   
+f1b5933fe4b5: Pushing [========>                                          ]  994.8kB/5.533MB
 ```
