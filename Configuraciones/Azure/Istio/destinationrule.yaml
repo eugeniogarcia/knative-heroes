@@ -2,6 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: heroes-svc-dr
+  namespace: heroes-ns
 spec:
   host: heroes-svc
   trafficPolicy:

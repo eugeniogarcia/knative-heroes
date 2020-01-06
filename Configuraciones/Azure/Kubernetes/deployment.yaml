@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: heroes-v1
+  namespace: heroes-ns
+  labels:
+    app: heroes
+    version: v1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: heroes
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: heroes
+        version: v1
+    spec:
+      containers:
+      - name: heroes
+        image: pruebacontenedor.azurecr.io/knative-heroes:latest
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 8082
+        livenessProbe:
+          httpGet:
+            path: /heroes
+            port: 8082
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
+        readinessProbe:
+          httpGet:
+            path: /heroes
+            port: 8082
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+      imagePullSecrets:
+      - name: milocalregistry
