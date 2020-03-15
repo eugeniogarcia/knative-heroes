@@ -1,0 +1,16 @@
+apiVersion: serving.knative.dev/v1
+kind: Configuration
+metadata:
+  name: heroes-last-svc
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - name: heroes
+          image: pruebacontenedor.azurecr.io/misheroes:0.0.2-SNAPSHOT
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 8082
+      imagePullSecrets:
+      - name: milocalregistry

@@ -1,15 +1,16 @@
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Configuration
 metadata:
   name: heroes-svc
-  namespace: heroes-kn-ns
+  namespace: default
 spec:
   template:
     spec:
-      serviceAccountName: build-bot
       containers:
-      - name: heroes
-        image: egsmcontenedor.azurecr.io/hello-jib:0.0.1-SNAPSHOT
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 8082
+        - name: heroes
+          image: pruebacontenedor.azurecr.io/misheroes:0.0.2-SNAPSHOT
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 8082
+      imagePullSecrets:
+      - name: milocalregistry

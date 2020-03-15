@@ -1,28 +1,29 @@
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Route
 metadata:
   name: heroes-svc
-  namespace: heroes-kn-ns
+  namespace: default
 spec:
   traffic:
-  - revisionName: heroes-svc-sw49d
-    name: v2
+  - revisionName: heroes-svc-k9fch
     percent: 60
-  - revisionName: heroes-svc-rnlw4
-    name: v1
+    tag: v1
+  - revisionName: heroes-svc-bmkjg
     percent: 40
-#http://heroes-svc.heroes-kn-ns/heroes
-#http://v1-heroes-svc.heroes-kn-ns/heroes
-#http://v2-heroes-svc.heroes-kn-ns/heroes
+    tag: v2
+#http://heroes-svc.default/heroes
+#http://v1.heroes-svc.default/heroes
+#http://v2.heroes-svc.default/heroes
 ---
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Route
 metadata:
   name: heroes-last-svc
-  namespace: heroes-kn-ns
+  namespace: default
 spec:
   traffic:
-  - configurationName: heroes-svc
+  - configurationName: heroes-last-svc
     percent: 100
+    tag: latest
 
-#http://heroes-last-svc.heroes-kn-ns/heroes
+#http://heroes-last-svc.default/heroes
