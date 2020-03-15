@@ -25,5 +25,6 @@ spec:
   - configurationName: heroes-last-svc
     percent: 100
     tag: latest
+    latestRevision: true
 
 #http://heroes-last-svc.default/heroes
